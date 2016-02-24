@@ -11,7 +11,8 @@ MyApp.get "/" do
 end
 
 MyApp.post "/user_login_form" do
-  @user = User.find_by_email(params["email"])
+  @users = User.all
+  @user  = User.find_by_email(params["email"])
 
   if @user == nil
     erb :"logins/login_error"    

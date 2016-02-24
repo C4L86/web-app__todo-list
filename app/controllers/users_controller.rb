@@ -16,9 +16,9 @@ MyApp.post "/new_user_form" do
   erb :"todos/welcome"
 end
 
-MyApp.post "/update_user/:user_id" do
+MyApp.get "/update_user/:user_id" do
   @users = User.all
-  @user = User.find_by_id(params[:user_id])
+  @user  = User.find_by_id(params[:user_id])
 
   erb :"users/update_user"
 end
