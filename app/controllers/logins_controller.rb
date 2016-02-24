@@ -5,3 +5,11 @@
 # and deleted (i.e. 'logging out').
 # 
 # Reading and Updating a login, however, make a little less sense.
+MyApp.get "/" do
+
+  erb :"logins/welcome"
+end
+
+MyApp.post "/user_login_form" do
+  
+end
