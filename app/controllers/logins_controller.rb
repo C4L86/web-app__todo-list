@@ -23,3 +23,17 @@ MyApp.post "/user_login_form" do
     erb :"logins/login_error"
   end
 end
+
+MyApp.get "/logout_user/:user_id" do
+  @user = User.find_by_id(params[:user_id])
+
+  if @user == nil
+     erb :"logins/logout_error"
+  elsif @user.id == session["user_id"]
+    session["user_id"] = nil
+
+    erb :"logins/logout_success"
+  else
+    erb :"logins/logout_error"
+  end
+end
