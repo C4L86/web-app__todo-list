@@ -16,13 +16,15 @@ MyApp.post "/new_user_form" do
   erb :"todos/welcome"
 end
 
-MyApp.get "/update_user" do
+MyApp.post "/update_user/:user_id" do
+  @users = User.all
+  @user = User.find_by_id(params[:user_id])
 
   erb :"users/update_user"
 end
 
-MyApp.post "/update_user_form/" do
-  @user = User.find_by_id(params["email"])
+MyApp.post "/process_update_user_form/:user_id" do
+  @user = User.find_by_id(params[:user_id])
 
   @user.name     = params["name"]
   @user.email    = params["email"]

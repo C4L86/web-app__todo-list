@@ -1,5 +1,9 @@
 <h1>Welcome <%= @user.name%>!</h1>
 
 <p>
-  <a href="/update_user">Update Profile</a>
+<% @users.each do |user| %>
+  <%= user.name %>
+  <br />
+  <a href="/update_user/<%= user.id %>">Update Profile</a>
+  <a href="/delete_user/<%= user.id %>">Delete Profile</a>
 </p>
