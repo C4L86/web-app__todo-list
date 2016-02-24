@@ -1,0 +1,39 @@
+<h1>Here is Your To-Do List, <%= @user.name %></h1>
+
+<p>
+  <a href="/welcome">Back</a>
+  <br />
+  <a href="/logout_user/<%= @user.id %>">Log Out</a>
+</p>
+
+<!--Have users submit items to be added to their to-do lists-->
+<p>
+  <form action="/add_todos" method="post">
+    To Do:
+    <br />
+    <input type="text" name="title" required>
+    <br />
+    Brief Desciption:
+    <br />
+    <input type="text" size="50" name="description" required>
+    <p>
+    <input type="submit" value="Add To Do">
+    </p>
+  </form>
+</p>
+
+<!--Populate a checkbox with to-do items from form above-->
+<p>
+  <form action="/todo_check[]" method="post">
+    <% @todos.each do |todo| %>
+    <input type="checkbox" name="completed" value="<%= true %>">
+    <strong><%= todo.title %></strong>
+    <br />
+    <i><%= todo.description %></i>
+    <br />
+    <% end %>
+    <p>
+    <input type="submit" value="Checked">
+    </p>
+  </form>
+</p>

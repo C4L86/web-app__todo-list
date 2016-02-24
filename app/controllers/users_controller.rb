@@ -22,9 +22,10 @@ MyApp.get "/update_user/:user_id" do
 
   if @user == nil
     erb :"users/user_update_error"
+  
   elsif @user.id == session["user_id"]
-
     erb :"users/update_user"
+  
   else
     erb :"users/user_update_error"
   end 
@@ -39,10 +40,11 @@ MyApp.post "/process_update_user_form/:user_id" do
 
   if @user == nil
      erb :"users/user_update_error"
+  
   elsif @user.id == session["user_id"]
     @user.save
-
     erb :"users/user_update_success"
+  
   else
     erb :"users/user_update_error"
   end
@@ -53,10 +55,11 @@ MyApp.get "/delete_user/:user_id" do
 
   if @user == nil
      erb :"users/user_delete_error"
+  
   elsif @user.id == session["user_id"]
     @user.delete
-
     erb :"users/user_delete_success"
+  
   else
     erb :"users/user_delete_error"
   end
