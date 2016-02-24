@@ -5,7 +5,8 @@ MyApp.get "/new_user" do
 end
 
 MyApp.post "/new_user_form" do
-  @user = User.new
+  @users = User.all
+  @user  = User.new
 
   @user.name     = params["name"]
   @user.email    = params["email"]
@@ -36,6 +37,20 @@ MyApp.post "/process_update_user_form/:user_id" do
     @user.save
 
     erb :"users/user_update_success"
+  else
+    erb :"users/user_update_error"
+  end
+end
+
+MyApp.get "/delete_user/:user_id" do
+  @user = User.find_by_id(params[:user_id])
+
+  if @user == nil
+     erb :"users/user_update_error"
+  elsif @user.id == session["user_id"]
+    @user.delete
+
+    erb :"users/user_delete_success"
   else
     erb :"users/user_update_error"
   end
