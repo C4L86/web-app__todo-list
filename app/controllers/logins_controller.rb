@@ -7,9 +7,16 @@
 # Reading and Updating a login, however, make a little less sense.
 MyApp.get "/" do
 
-  erb :"logins/welcome"
+  erb :"logins/login"
 end
 
 MyApp.post "/user_login_form" do
-  
+  @user = User.find_by_email(params["email"])
+
+  if @user.password == params["password"]
+    session["user_id"] = @user.id
+    erb :"todos/welcome"
+  else
+    erb :"logins/login_error"
+  end
 end

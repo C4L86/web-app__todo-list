@@ -1,7 +1,7 @@
 # This controller is for all the CRUD operations related to a User.
 MyApp.get "/new_user" do
 
-  erb :"users/create"
+  erb :"users/new_user"
 end
 
 MyApp.post "/new_user_form" do
@@ -13,5 +13,5 @@ MyApp.post "/new_user_form" do
 
   @user.save
 
-  erb :""
+  erb :"todos/welcome"
 end
