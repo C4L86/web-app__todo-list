@@ -1,0 +1,15 @@
+<h1>Authenticated Users</h1>
+
+<p>
+  <a href="/welcome">Back</a>
+</p>
+
+<p>
+<% @users.each do |user| %>
+  <%= user.name %>
+  <a href="/update_user/<%= user.id %>">Update</a>
+  <a href="/delete_user/<%= user.id %>">Delete</a>
+  <a href="/logout_user/<%= user.id %>">Log Out</a>
+  <br />
+<% end %>
+</p>

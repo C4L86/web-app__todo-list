@@ -61,3 +61,10 @@ MyApp.get "/delete_user/:user_id" do
     erb :"users/user_delete_error"
   end
 end
+
+MyApp.get "/user_profile" do
+  @users = User.all
+  @user = User.find_by_id(session["user_id"])
+
+  erb :"users/user_profile"
+end
