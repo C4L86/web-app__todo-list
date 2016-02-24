@@ -15,7 +15,9 @@ MyApp.post "/user_login_form" do
   @user  = User.find_by_email(params["email"])
 
   if @user == nil
-    erb :"logins/login_error"    
+    erb :"logins/login_error"
+  elsif session["user_id"] != nil
+    erb :"logins/previous_login_error"
   elsif @user.password == params["password"]
     session["user_id"] = @user.id
     erb :"todos/welcome"

@@ -1,4 +1,8 @@
-<h1>Welcome!</h1>
+<h1>Welcome, <%= @user.name %>!</h1>
+
+<p>
+<a href="/">Log In</a>
+</p>
 
 <p>
 <% @users.each do |user| %>

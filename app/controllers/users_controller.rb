@@ -1,4 +1,3 @@
-# This controller is for all the CRUD operations related to a User.
 MyApp.get "/new_user" do
 
   erb :"users/new_user"
@@ -21,7 +20,14 @@ MyApp.get "/update_user/:user_id" do
   @users = User.all
   @user  = User.find_by_id(params[:user_id])
 
-  erb :"users/update_user"
+  if @user == nil
+    erb :"users/user_update_error"
+  elsif @user.id == session["user_id"]
+
+    erb :"users/update_user"
+  else
+    erb :"users/user_update_error"
+  end 
 end
 
 MyApp.post "/process_update_user_form/:user_id" do
@@ -46,12 +52,12 @@ MyApp.get "/delete_user/:user_id" do
   @user = User.find_by_id(params[:user_id])
 
   if @user == nil
-     erb :"users/user_update_error"
+     erb :"users/user_delete_error"
   elsif @user.id == session["user_id"]
     @user.delete
 
     erb :"users/user_delete_success"
   else
-    erb :"users/user_update_error"
+    erb :"users/user_delete_error"
   end
 end
