@@ -16,11 +16,18 @@ MyApp.post "/user_login_form" do
 
   if @user == nil
     erb :"logins/login_error"
-  elsif session["user_id"] != nil
+  
+  elsif session["user_id"] != nil && session["user_id"] == @user.id
     erb :"logins/previous_login_error"
+
+  elsif session["user_id"] != nil && session["user_id"] != @user.id
+    session["user_id"] = nil
+    erb :"logins/other_login_error"
+
   elsif @user.password == params["password"]
     session["user_id"] = @user.id
     erb :"todos/welcome"
+  
   else
     erb :"logins/login_error"
   end
@@ -31,10 +38,11 @@ MyApp.get "/logout_user/:user_id" do
 
   if @user == nil
      erb :"logins/logout_error"
+  
   elsif @user.id == session["user_id"]
     session["user_id"] = nil
-
     erb :"logins/logout_success"
+  
   else
     erb :"logins/logout_error"
   end
