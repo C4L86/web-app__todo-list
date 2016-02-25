@@ -1,0 +1,21 @@
+<h1>Update <%= @todo.title %></h1>
+
+<p>
+  <a href="/todo_list">Back</a>
+</p>
+
+<p>
+  <form action="/process_todo_update_form/<%= @todo.id %>" method="post">
+    To Do:
+    <br />
+    <input type="text" name="title" placeholder="<%= @todo.title %>" required>
+    <br />
+    Brief Description:
+    <br />
+    <input type="text" size="50" name="description" 
+    placeholder="<%= @todo.description %>" required>
+    <p>
+    <input type="submit" value="Update To Do">
+    </p>
+  </form>
+</p>

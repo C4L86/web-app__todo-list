@@ -6,14 +6,13 @@
   <a href="/logout_user/<%= @user.id %>">Log Out</a>
 </p>
 
-<!--Have users submit items to be added to their to-do lists-->
 <p>
   <form action="/add_todos" method="post">
     To Do:
     <br />
     <input type="text" name="title" required>
     <br />
-    Brief Desciption:
+    Brief Description:
     <br />
     <input type="text" size="50" name="description" required>
     <p>
@@ -22,18 +21,19 @@
   </form>
 </p>
 
-<!--Populate a checkbox with to-do items from form above-->
 <p>
-  <form action="/todo_check[]" method="post">
+  <form action="/todo_check" method="post">
     <% @todos.each do |todo| %>
-    <input type="checkbox" name="completed" value="<%= true %>">
-    <strong><%= todo.title %></strong>
-    <br />
-    <i><%= todo.description %></i>
-    <br />
+      <input type="checkbox" name="completed[]" value="<%= true %>">
+      <strong><%= todo.title %></strong>
+      <a href="/todo_update/<%= todo.id %>">update</a>
+      <a href="todo_delete/<%= todo.id %>">delete</a>
+      <br />
+      <i><%= todo.description %></i>
+      <br />
     <% end %>
     <p>
-    <input type="submit" value="Checked">
+      <input type="submit" value="Checked">
     </p>
   </form>
 </p>
