@@ -65,10 +65,15 @@ MyApp.post "/process_todo_update_form/:todo_id" do
 end
 
 MyApp.post "/todo_check" do
-  binding.pry
   @todos = Todo.where({"user_id" => session["user_id"]})
-  @todo  = Todo.new
   @user  = User.find_by_id(session["user_id"])
+  @todo_arr = params.to_a
 
+  @todo_arr.each do |todo|
+    x = Todo.find_by_id(todo[0])
+    x.completed = true
+    x.save
+  end
   
+  erb :"todos/todo_check_success"
 end
