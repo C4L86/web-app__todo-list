@@ -1,4 +1,3 @@
-# This controller is for all the CRUD operations related to a Todo.
 MyApp.get "/welcome" do
   @users = User.all
   @user  = User.find_by_id(session["user_id"])
@@ -6,7 +5,7 @@ MyApp.get "/welcome" do
   erb :"todos/welcome"
 end
 
-MyApp.get "/todo_list" do
+MyApp.get "/todo_personal" do
   @todos = Todo.where({"user_id" => session["user_id"]})
   @todo  = Todo.new
   @user  = User.find_by_id(session["user_id"])
@@ -16,8 +15,13 @@ MyApp.get "/todo_list" do
     erb :"todos/invalid_user"
 
   else
-    erb :"todos/todo_list"
+    erb :"todos/todo_personal"
   end
+end
+
+MyApp.get "/todo_group" do
+
+  erb :"todos/todo_group"
 end
 
 MyApp.post "/add_todos" do
@@ -32,7 +36,7 @@ MyApp.post "/add_todos" do
 
   @todo.save
 
-  erb :"todos/todo_list"
+  erb :"todos/todo_personal"
 end
 
 MyApp.get "/todo_update/:todo_id" do
@@ -48,7 +52,7 @@ MyApp.get "/todo_delete/:todo_id" do
   
   @todo.delete
 
-  erb :"todos/todo_delete_success"
+  redirect "/todo_personal"
 end
 
 MyApp.post "/process_todo_update_form/:todo_id" do
@@ -79,7 +83,6 @@ MyApp.post "/todo_check" do
       todo = Todo.find_by_id(key)
       if value == ["on"]
         todo.completed = true
-      else
       end
       todo.save
     end

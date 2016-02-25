@@ -1,11 +1,14 @@
 <h1>Welcome, <%= @user.name %>!</h1>
 
 <p>
-  <a href="/todo_list">Go To Your To-Do List</a>
+  <a href="/todo_personal">Your To-Do List</a>
 </p>
 <p>
-  <a href="/logout_user/<%= @user.id %>">Log Out</a>
+  <a href="/todo_group">Group To-Do List</a>
 </p>
 <p>
   <a href="/user_profile">Users</a>
+</p>
+<p>
+  <a href="/logout_user/<%= @user.id %>">Log Out</a>
 </p>
