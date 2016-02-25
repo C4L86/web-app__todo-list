@@ -67,12 +67,22 @@ end
 MyApp.post "/todo_check" do
   @todos = Todo.where({"user_id" => session["user_id"]})
   @user  = User.find_by_id(session["user_id"])
-  @todo_arr = params.to_a
-
-  @todo_arr.each do |todo|
-    x = Todo.find_by_id(todo[0])
-    x.completed = true
-    x.save
+#
+# Need to place the following in a Model method
+  if params == {}
+    @todos.each do |todo|
+      todo.completed = false
+      todo.save
+    end
+  else
+    params.each do |key, value|
+      todo = Todo.find_by_id(key)
+      if value == ["on"]
+        todo.completed = true
+      else
+      end
+      todo.save
+    end
   end
   
   erb :"todos/todo_check_success"
