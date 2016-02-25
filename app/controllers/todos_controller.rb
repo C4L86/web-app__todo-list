@@ -65,7 +65,7 @@ MyApp.post "/process_todo_update_form/:todo_id" do
 
   @todo.save
 
-  erb :"todos/todo_update_success"
+  redirect "/todo_personal"
 end
 
 MyApp.post "/todo_check" do
@@ -88,5 +88,5 @@ MyApp.post "/todo_check" do
     end
   end
   
-  erb :"todos/todo_check_success"
+  redirect "/todo_personal"
 end
