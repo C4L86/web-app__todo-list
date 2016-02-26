@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.text     "description"
     t.boolean  "completed"
     t.integer  "user_id"
+    t.integer  "station"
+    t.integer  "todo_user"
   end
 
   create_table "users", force: :cascade do |t|

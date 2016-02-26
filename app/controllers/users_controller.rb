@@ -12,8 +12,15 @@ MyApp.post "/new_user_form" do
   @user.password = params["password"]
 
   @user.save
+  session["user_id"] = @user.id
+  redirect "/welcome"
+end
 
-  erb :"todos/welcome"
+MyApp.get "/welcome" do
+  @users = User.all
+  @user  = User.find_by_id(session["user_id"])
+  
+  erb :"users/user_welcome"
 end
 
 MyApp.get "/user_update/:user_id" do
@@ -43,7 +50,7 @@ MyApp.post "/process_user_update_form/:user_id" do
   
   elsif @user.id == session["user_id"]
     @user.save
-    erb :"users/user_update_success"
+    redirect "/user_profile"
   
   else
     erb :"users/user_update_error"
@@ -57,6 +64,7 @@ MyApp.get "/delete_user/:user_id" do
      erb :"users/user_delete_error"
   
   elsif @user.id == session["user_id"]
+    session["user_id"] = nil
     @user.delete
     erb :"users/user_delete_success"
   

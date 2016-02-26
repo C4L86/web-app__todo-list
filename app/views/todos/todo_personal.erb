@@ -8,8 +8,11 @@
 
 <p>
   <form action="/add_todos" method="post">
+  <fieldset>
+    <legend><strong>ADD:</strong></legend>
     To Do:
     <br />
+    <input type="hidden" name="station" value="1">
     <input type="text" name="title" required>
     <br />
     Brief Description:
@@ -18,26 +21,42 @@
     <p>
     <input type="submit" value="Add To Do">
     </p>
+  </fieldset>
   </form>
 </p>
 
+<br />
+
 <p>
+  <h4>PERSONAL TO-DO's:</h4>
   <form action="/todo_check" method="post">
     <% @todos.each do |todo| %>
+      <p>
       <input type="checkbox" name="<%= todo.id %>[]" 
       <%= "checked" if todo.completed == true %>>
       <strong><%= todo.title %></strong>
-      
-      <a href="/todo_update/<%= todo.id %>">update</a>
-      <a href="todo_delete/<%= todo.id %>">delete</a>
-      
       <br />
-      
       <i><%= todo.description %></i>
       <br />
+      <a href="/todo_update/<%= todo.id %>">update</a>
+      <a href="todo_delete/<%= todo.id %>">delete</a>
+      </p>
     <% end %>
     <p>
       <input type="submit" value="Checked">
     </p>
   </form>
+</p>
+
+<br />
+
+<p>
+  <a href="/todo_group">ASSIGNED TO-DO's:</a>
+  <br />
+  <ul>
+  <% @user_todos.each do |todo| %>
+    <li><strong><%= todo.title %></strong></li>
+    <br />
+  <% end %> 
+  </ul>
 </p>

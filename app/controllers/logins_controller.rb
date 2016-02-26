@@ -26,7 +26,7 @@ MyApp.post "/user_login_form" do
 
   elsif @user.password == params["password"]
     session["user_id"] = @user.id
-    erb :"todos/welcome"
+    redirect "/welcome"
   
   else
     erb :"logins/login_error"
@@ -41,7 +41,7 @@ MyApp.get "/logout_user/:user_id" do
   
   elsif @user.id == session["user_id"]
     session["user_id"] = nil
-    erb :"logins/logout_success"
+    redirect "/"
   
   else
     erb :"logins/logout_error"

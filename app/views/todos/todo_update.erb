@@ -14,6 +14,19 @@
     <br />
     <input type="text" size="50" name="description" 
     placeholder="<%= @todo.description %>" required>
+    <br />
+    Assign To:
+    <br />
+    <select name="todo_user">
+      <option>Select a user...</option>
+      <% User.all.each do |user| %>
+        <option value="<%= user.id %>" required
+        <%= "selected" if @todo.user_id == user.id %>>
+          <%= user.name %>
+        </option>
+      <% end %>
+    </select>
+    <br />
     <p>
     <input type="submit" value="Update To Do">
     </p>

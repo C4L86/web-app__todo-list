@@ -6,39 +6,59 @@
 <p>
   <a href="/user_profile">Users</a>
 </p>
-<!--
-Probably need to change code to account for multiple users adding 'todos'
--->
+<p>
+  <a href="/todo_personal">Your To-Do List</a>
+</p>
+
 <p>
   <form action="/add_todos" method="post">
-<!--May need hidden input to account for which user submitted the 'todo'-->
-    <input type="hidden" 
+  <fieldset>
+    <legend><strong>ADD:</strong></legend>
     To Do:
     <br />
+    <input type="hidden" name="station" value="2">
     <input type="text" name="title" required>
     <br />
     Brief Description:
     <br />
     <input type="text" size="50" name="description" required>
+    <br />
+    Assign To:
+    <br />
+    <select name="todo_user">
+      <option>Select a user...</option>
+      <% User.all.each do |user| %>
+        <option value="<%= user.id %>" required>
+          <%= user.name %>
+        </option>
+      <% end %>
+    </select>
     <p>
+    <br />
     <input type="submit" value="Add To Do">
     </p>
+  </fieldset>
   </form>
 </p>
 
+<br />
+
 <p>
+  <h4>GROUP TO-DO's:</h4>
   <form action="/todo_check" method="post">
     <% @todos.each do |todo| %>
+      <p>
       <input type="checkbox" name="<%= todo.id %>[]" 
       <%= "checked" if todo.completed == true %>>
       <strong><%= todo.title %></strong>
-      
-      <a href="/todo_update/<%= todo.id %>">update</a>
-      <a href="todo_delete/<%= todo.id %>">delete</a>
       <br />
-      
       <i><%= todo.description %></i>
       <br />
+      for: <%= User.find_by_id(todo.todo_user).name %>
+      <br />
+      <a href="/todo_update/<%= todo.id %>">update</a>
+      <a href="todo_delete/<%= todo.id %>">delete</a>
+      </p>
     <% end %>
     <p>
       <input type="submit" value="Checked">
