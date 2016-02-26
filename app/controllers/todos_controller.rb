@@ -89,20 +89,14 @@ MyApp.post "/todo_check" do
   key_arr = params.keys
 #
 # Need to place the following in a Model method
-  binding.pry
-  if params == {}
-    @todos.each do |todo|
+  params.each do |key, value|
+    todo = Todo.find_by_id(key)
+    if value == ["0", "1"]
+      todo.completed = true
+    else
       todo.completed = false
-      todo.save
     end
-  else
-    params.each do |key, value|
-      todo = Todo.find_by_id(key)
-      if value == ["on"]
-        todo.completed = true
-      end
-      todo.save
-    end
+    todo.save
   end
 
   if Todo.find_by_id(key_arr[0]).station == 1

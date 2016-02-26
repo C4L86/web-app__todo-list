@@ -35,7 +35,8 @@
   <form action="/todo_check" method="post">
     <% @todos.each do |todo| %>
       <p>
-      <input type="checkbox" name="<%= todo.id %>[]" 
+      <input type="hidden" value="0" name="<%= todo.id %>[]">
+      <input type="checkbox" value="1" name="<%= todo.id %>[]" 
       <%= "checked" if todo.completed == true %>>
       <strong><%= todo.title %></strong>
       <br />
