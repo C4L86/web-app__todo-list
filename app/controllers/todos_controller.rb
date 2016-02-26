@@ -25,7 +25,6 @@ end
 MyApp.post "/add_todos" do
   @todos = Todo.all
   @todo  = Todo.new
-  # @user  = User.find_by_id(session["user_id"])
 
   @todo.title       = params["title"]
   @todo.description = params["description"]
@@ -56,7 +55,7 @@ MyApp.get "/todo_delete/:todo_id" do
   @user  = User.find_by_id(session["user_id"])
   
   @todo.delete
-# Create conditional for whether it's a personal or group todo
+
   if @todo.station == 1
     redirect "/todo_personal"
   else
@@ -81,8 +80,7 @@ MyApp.post "/process_todo_update_form/:todo_id" do
     redirect "/todo_group"
   end
 end
-# 
-# I believe this is set to allow user to only check their own todos
+
 MyApp.post "/todo_check" do
   @todos = Todo.where({"user_id" => session["user_id"]})
   @user  = User.find_by_id(session["user_id"])
