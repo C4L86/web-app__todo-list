@@ -54,8 +54,12 @@
       <input type="hidden" value="0" name="<%= todo.id %>[]">
       <input type="checkbox" value="1" name="<%= todo.id %>[]" 
       <%= "checked" if todo.completed == true %>>
+      <% if todo.todo_user == session["user_id"] %>
+      <strong style="color:red"><%= todo.title %></strong>
+      <% else %>
       <strong><%= todo.title %></strong>
-
+      <% end %>
+      
       <br />
       <%= todo.description %>
       <br />
