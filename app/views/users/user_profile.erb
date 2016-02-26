@@ -6,10 +6,12 @@
 
 <p>
 <% @users.each do |user| %>
-  <%= user.name %>
+  <p>
+  <strong><%= user.name %></strong>
+  <br />
   <a href="/user_update/<%= user.id %>">Update</a>
   <a href="/delete_user/<%= user.id %>">Delete</a>
   <a href="/logout_user/<%= user.id %>">Log Out</a>
-  <br />
+  </p>
 <% end %>
 </p>

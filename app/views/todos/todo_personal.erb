@@ -10,14 +10,17 @@
   <form action="/add_todos" method="post">
   <fieldset>
     <legend><strong>ADD:</strong></legend>
+
     To Do:
     <br />
     <input type="hidden" name="station" value="1">
     <input type="text" name="title" required>
     <br />
+
     Brief Description:
     <br />
     <input type="text" size="50" name="description" required>
+
     <p>
     <input type="submit" value="Add To Do">
     </p>
@@ -36,12 +39,13 @@
       <%= "checked" if todo.completed == true %>>
       <strong><%= todo.title %></strong>
       <br />
-      <i><%= todo.description %></i>
+      <%= todo.description %>
       <br />
       <a href="/todo_update/<%= todo.id %>">update</a>
       <a href="todo_delete/<%= todo.id %>">delete</a>
       </p>
     <% end %>
+    
     <p>
       <input type="submit" value="Checked">
     </p>

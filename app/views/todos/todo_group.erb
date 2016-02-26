@@ -7,7 +7,7 @@
   <a href="/user_profile">Users</a>
 </p>
 <p>
-  <a href="/todo_personal">Your To-Do List</a>
+  <a href="/todo_personal">Your To-Do's</a>
 </p>
 
 <p>
@@ -19,10 +19,12 @@
     <input type="hidden" name="station" value="2">
     <input type="text" name="title" required>
     <br />
+
     Brief Description:
     <br />
     <input type="text" size="50" name="description" required>
     <br />
+
     Assign To:
     <br />
     <select name="todo_user">
@@ -33,6 +35,7 @@
         </option>
       <% end %>
     </select>
+
     <p>
     <br />
     <input type="submit" value="Add To Do">
@@ -52,14 +55,15 @@
       <%= "checked" if todo.completed == true %>>
       <strong><%= todo.title %></strong>
       <br />
-      <i><%= todo.description %></i>
+      <%= todo.description %>
       <br />
-      for: <%= User.find_by_id(todo.todo_user).name %>
+      <i>for: <%= User.find_by_id(todo.todo_user).name %></i>
       <br />
       <a href="/todo_update/<%= todo.id %>">update</a>
       <a href="todo_delete/<%= todo.id %>">delete</a>
       </p>
     <% end %>
+    
     <p>
       <input type="submit" value="Checked">
     </p>

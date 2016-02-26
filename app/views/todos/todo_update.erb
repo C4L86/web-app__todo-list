@@ -10,11 +10,13 @@
     <br />
     <input type="text" name="title" placeholder="<%= @todo.title %>" required>
     <br />
+
     Brief Description:
     <br />
     <input type="text" size="50" name="description" 
     placeholder="<%= @todo.description %>" required>
     <br />
+
     Assign To:
     <br />
     <select name="todo_user">
@@ -27,6 +29,7 @@
       <% end %>
     </select>
     <br />
+    
     <p>
     <input type="submit" value="Update To Do">
     </p>
