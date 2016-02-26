@@ -45,12 +45,9 @@ end
 
 MyApp.get "/todo_update/:todo_id" do
   @user  = User.find_by_id(session["user_id"])
+  @todo  = Todo.find_by_id(params[:todo_id])
 
-  if @todo.station == 1
-    redirect "/todo_personal"
-  else
-    redirect "/todo_group"
-  end
+  erb :"todos/todo_update"
 end
 
 MyApp.get "/todo_delete/:todo_id" do
@@ -72,7 +69,8 @@ MyApp.post "/process_todo_update_form/:todo_id" do
   @todo  = Todo.find_by_id(params[:todo_id])
   @user  = User.find_by_id(session["user_id"])
 
-  @todo.station     = params["title"]
+  # @todo.station     = params["station"]
+  @todo.title       = params["title"]
   @todo.description = params["description"]
   @todo.todo_user   = params["todo_user"].to_i
 
