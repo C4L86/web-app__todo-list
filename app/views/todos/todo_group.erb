@@ -28,7 +28,7 @@
     Assign To:
     <br />
     <select name="todo_user">
-      <option>Select a user...</option>
+      <option value="" disabled selected hidden>Select a user...</option>
       <% User.all.each do |user| %>
         <option value="<%= user.id %>" required>
           <%= user.name %>

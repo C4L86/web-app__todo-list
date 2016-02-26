@@ -59,7 +59,11 @@
   <br />
   <ul>
   <% @user_todos.each do |todo| %>
-    <li><strong><%= todo.title %></strong></li>
+    <li>
+      <strong><%= todo.title %></strong>
+      <br />
+      <i>by: <%= User.find_by_id(todo.user_id).name %></i>
+    </li>
     <br />
   <% end %> 
   </ul>
