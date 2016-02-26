@@ -12,7 +12,7 @@
   <form action="/process_todo_update_form/<%= @todo.id %>" method="post">
     To Do:
     <br />
-<!--     <input type="hidden" name="station" value="<%= @todo.station %>"> -->
+
     <input type="text" name="title" placeholder="<%= @todo.title %>" required>
     <br />
 
@@ -27,12 +27,14 @@
     <br />
     <select name="todo_user">
       <option value="" disabled selected hidden>Select a user...</option>
+      
       <% User.all.each do |user| %>
         <option value="<%= user.id %>" required
         <%= "selected" if @todo.todo_user == user.id %>>
           <%= user.name %>
         </option>
       <% end %>
+      
     </select>
     <br />
     <% else %>

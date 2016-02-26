@@ -69,7 +69,6 @@ MyApp.post "/process_todo_update_form/:todo_id" do
   @todo  = Todo.find_by_id(params[:todo_id])
   @user  = User.find_by_id(session["user_id"])
 
-  # @todo.station     = params["station"]
   @todo.title       = params["title"]
   @todo.description = params["description"]
   @todo.todo_user   = params["todo_user"].to_i
@@ -87,8 +86,10 @@ end
 MyApp.post "/todo_check" do
   @todos = Todo.where({"user_id" => session["user_id"]})
   @user  = User.find_by_id(session["user_id"])
+  key_arr = params.keys
 #
 # Need to place the following in a Model method
+  binding.pry
   if params == {}
     @todos.each do |todo|
       todo.completed = false
@@ -104,7 +105,7 @@ MyApp.post "/todo_check" do
     end
   end
 
-  if @todo.station == 1
+  if Todo.find_by_id(key_arr[0]).station == 1
     redirect "/todo_personal"
   else
     redirect "/todo_group"
