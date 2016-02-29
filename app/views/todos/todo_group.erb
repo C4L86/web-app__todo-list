@@ -26,14 +26,13 @@
     <br />
 
     Assign To:
-    <br />
-    <select name="todo_user">
-      <option value="" disabled selected hidden>Select a user...</option>
-      <% User.all.each do |user| %>
-        <option value="<%= user.id %>" required>
-          <%= user.name %>
-        </option>
-      <% end %>
+    <br /> 
+    <% User.all.each do |user| %>
+      <input type="checkbox" value="<%= user.id %>" name="todo_user[]">
+        <%= user.name %>
+        <br />
+      </option>
+    <% end %>
     </select>
 
     <p>
@@ -54,19 +53,24 @@
       <input type="hidden" value="0" name="<%= todo.id %>[]">
       <input type="checkbox" value="1" name="<%= todo.id %>[]" 
       <%= "checked" if todo.completed == true %>>
-      <% if todo.todo_user == session["user_id"] %>
-      <strong style="color:red"><%= todo.title %></strong>
-      <% else %>
-      <strong><%= todo.title %></strong>
-      <% end %>
       
+      <% if todo.todo_user == session["user_id"] %>
+        <strong style="color:red"><%= todo.title %></strong>
+      <% else %>
+        <strong><%= todo.title %></strong>
+      <% end %>
+
       <br />
       <%= todo.description %>
       <br />
 
       <i>by: <%= User.find_by_id(todo.user_id).name %></i>
       <br />      
-      <i>for: <%= User.find_by_id(todo.todo_user).name %></i>
+      <i>
+      for:
+      <!--Figure out how to print each user assigned to this to-do-->
+      <%= User.find_by_id(todo.todo_user).name %>
+      </i>
       <br />
       
       <a href="/todo_update/<%= todo.id %>">update</a>

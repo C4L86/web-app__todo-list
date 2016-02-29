@@ -24,6 +24,8 @@ end
 
 MyApp.post "/add_todos" do
   @todos = Todo.all
+  
+  params["todo_user"].each do |user|
   @todo  = Todo.new
 
   @todo.title       = params["title"]
@@ -31,9 +33,10 @@ MyApp.post "/add_todos" do
   @todo.completed   = false
   @todo.user_id     = session["user_id"]
   @todo.station     = params["station"].to_i
-  @todo.todo_user   = params["todo_user"].to_i
+  @todo.todo_user   = user.to_i
 
   @todo.save
+  end
 
   if @todo.station == 1
     redirect "/todo_personal"

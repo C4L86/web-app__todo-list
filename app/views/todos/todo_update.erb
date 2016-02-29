@@ -24,19 +24,15 @@
 
     <% if @todo.station == 2 %>
     Assign To:
-    <br />
-    <select name="todo_user">
-      <option value="" disabled selected hidden>Select a user...</option>
-      
+      <br />
       <% User.all.each do |user| %>
-        <option value="<%= user.id %>" required
-        <%= "selected" if @todo.todo_user == user.id %>>
+        <input type="checkbox" value="<%= user.id %>" name="todo_user[]"
+        <%= "checked" if @todo.todo_user == user.id %>>
           <%= user.name %>
+          <br />
         </option>
       <% end %>
-      
-    </select>
-    <br />
+      </select>
     <% else %>
     <% end %> 
     
